@@ -1,13 +1,8 @@
 import { AppDataSource } from "../config/database";
-import { CustomerSeeder } from "./CustomerSeeder";
-import { UserSeeder } from "./UserSeeder";
+import { Seeder } from "./Seeder";
 
-export { default as CustomerSeeder } from './CustomerSeeder';
-export { default as UserSeeder } from './UserSeeder';
-
-export const seeders: { [key: string]: typeof UserSeeder } = {
-    user: UserSeeder,
-    customer: CustomerSeeder,// Add more seeders here
+export const seeders = {} as { 
+    [key: string]: new () => Seeder & { new(): Seeder } 
 };
 
 const runSpecificSeeder = async (seederName: string) => {
