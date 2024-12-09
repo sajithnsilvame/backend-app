@@ -1,32 +1,26 @@
-import { AppDataSource } from "../config/database";
-import { User } from "../entities/User";
-import { Seeder } from "./Seeder";
+import { AppDataSource } from '../config/database';
+import { User } from '../entities/User';
+import { Seeder } from './Seeder';
 
 export class UserSeeder implements Seeder {
     async run(): Promise<void> {
-        const userRepository = AppDataSource.getRepository(User);
+        const repository = AppDataSource.getRepository(User);
 
-        const users = [
+        // Clear existing data
+        await repository.clear();
+
+        // Create seed data
+        const seedData: Partial<User>[] = [
             {
-                name: "John Doe",
-                email: "john@example.com"
-            },
-            {
-                name: "Jane Smith",
-                email: "jane@example.com"
-            },
-            {
-                name: "Bob Johnson",
-                email: "bob@example.com"
+                // Add your seed data here
+                // Example: name: 'John Doe',
+                // email: 'john@example.com'
             }
         ];
 
-        for (const userData of users) {
-            const existingUser = await userRepository.findOne({ where: { email: userData.email } });
-            if (!existingUser) {
-                const user = userRepository.create(userData);
-                await userRepository.save(user);
-            }
-        }
+        await repository.save(seedData);
+        console.log('User seeded successfully');
     }
 }
+
+export default new UserSeeder();

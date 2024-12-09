@@ -1,22 +1,23 @@
 {
   "name": "backend-app",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node dist/index.js",
-    "dev": "nodemon src/index.ts --exec ts-node",
+    "start": "ts-node src/index.ts",
+    "dev": "nodemon --exec ts-node src/index.ts",
     "typeorm": "ts-node ./node_modules/typeorm/cli.js",
-    "migration:generate": "npm run typeorm -- migration:generate ./src/migrations/users -d ./src/config/database.ts",
-    "migration:run": "npm run typeorm -- migration:run -d ./src/config/database.ts",
+    "migration:generate": "npm run typeorm -- migration:generate -d ./src/config/database.ts",
+    "migration": "npm run typeorm -- migration:run -d ./src/config/database.ts",
     "migration:revert": "npm run typeorm -- migration:revert -d ./src/config/database.ts",
-    "seed": "ts-node src/seeders/index.ts",
-    "seed:user": "ts-node src/seeders/index.ts user"
+    "generate:seeder": "ts-node src/scripts/generate-seeder.ts",
+    "seed": "ts-node ./src/scripts/runSeeder.ts",
+    "generate:entity": "ts-node ./src/scripts/generate-entity.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
