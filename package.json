@@ -7,13 +7,16 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node src/index.ts",
     "dev": "nodemon --exec ts-node src/index.ts",
+    "build": "tsc",
     "typeorm": "ts-node ./node_modules/typeorm/cli.js",
     "migration:generate": "npm run typeorm -- migration:generate -d ./src/config/database.ts",
     "migration": "npm run typeorm -- migration:run -d ./src/config/database.ts",
     "migration:revert": "npm run typeorm -- migration:revert -d ./src/config/database.ts",
     "generate:seeder": "ts-node src/scripts/generate-seeder.ts",
     "seed": "ts-node ./src/scripts/runSeeder.ts",
-    "generate:entity": "ts-node ./src/scripts/generate-entity.ts"
+    "generate:entity": "ts-node ./src/scripts/generate-entity.ts",
+    "lint": "eslint . --config eslint.config.js",
+    "lint:fix": "eslint . --config eslint.config.js --fix"
   },
   "keywords": [],
   "author": "",
@@ -27,6 +30,9 @@
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.17.0",
+    "@typescript-eslint/parser": "^8.17.0",
+    "eslint": "^9.16.0",
     "nodemon": "^3.1.7",
     "ts-node": "^10.9.2"
   }

@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { DataSource } from 'typeorm';
+
 
 // Define field types for type mapping
 const typeMap: { [key: string]: string } = {
@@ -70,11 +70,10 @@ async function generateMigrationFile(entityName: string, fields: { [key: string]
 
     // Capitalize first letter of entity name
     const capitalizedEntityName = entityName.charAt(0).toUpperCase() + entityName.slice(1);
-    const tableName = `${entityName.toLowerCase()}s`;
+    
 
     // Timestamp for migration name
     const timestamp = Date.now();
-    const migrationName = `${capitalizedEntityName}${timestamp}`;
     const migrationDir = path.join(__dirname, '..', 'migrations');
     const migrationFileName = path.join(migrationDir, `${timestamp}-${entityName.toLowerCase()}.ts`);
 
