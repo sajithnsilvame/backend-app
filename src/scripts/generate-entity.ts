@@ -32,20 +32,24 @@ export class ${capitalizedEntityName} {
     // Add fields with appropriate decorators
     Object.entries(fields).forEach(([fieldName, fieldType]) => {
         let tsType = typeMap[fieldType.toLowerCase()] || 'string';
-        let columnDecorator = '@Column()';
+        let columnOptions = {};
 
         // Special decorators for specific types
         switch (fieldType.toLowerCase()) {
             case 'email':
-                columnDecorator = '@Column({ unique: true })';
+                columnOptions = { unique: true };
                 break;
             case 'text':
-                columnDecorator = '@Column("text")';
+                columnOptions = { type: 'text' };
                 break;
             case 'date':
-                columnDecorator = '@Column({ type: "timestamp" })';
+                columnOptions = { type: 'timestamp' };
                 break;
         }
+
+        const columnDecorator = Object.keys(columnOptions).length > 0 
+            ? `@Column(${JSON.stringify(columnOptions)})` 
+            : '@Column()';
 
         entityContent += `
     ${columnDecorator}
