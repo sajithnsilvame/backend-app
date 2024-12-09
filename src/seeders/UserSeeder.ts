@@ -1,6 +1,6 @@
 import { AppDataSource } from '../config/database';
 import { User } from '../entities/User';
-import { Seeder } from './Seeder';
+import { Seeder } from '../config/seeder/Seeder';
 
 export class UserSeeder implements Seeder {
     async run(): Promise<void> {

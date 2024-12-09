@@ -4,7 +4,7 @@ import * as path from 'path';
 const generateSeeder = (entityName: string) => {
     const seederTemplate = `import { AppDataSource } from '../config/database';
 import { ${entityName} } from '../entities/${entityName}';
-import { Seeder } from './Seeder';
+import { Seeder } from '../config/seeder/Seeder';
 
 export class ${entityName}Seeder implements Seeder {
     async run(): Promise<void> {
@@ -17,8 +17,7 @@ export class ${entityName}Seeder implements Seeder {
         const seedData: Partial<${entityName}>[] = [
             {
                 // Add your seed data here
-                // Example: name: 'John Doe',
-                // email: 'john@example.com'
+                
             }
         ];
 
@@ -43,20 +42,20 @@ export default new ${entityName}Seeder();`;
     console.log(`Seeder for ${entityName} generated at ${seederPath}`);
 
     // Update seeders index
-    const indexPath = path.join(seedersDir, 'index.ts');
-    let indexContent = fs.existsSync(indexPath) 
-        ? fs.readFileSync(indexPath, 'utf-8') 
-        : `import { Seeder } from './Seeder';\n\nexport const seeders: Seeder[] = [];\n`;
+//     const indexPath = path.join(seedersDir, 'index.ts');
+//     let indexContent = fs.existsSync(indexPath) 
+//         ? fs.readFileSync(indexPath, 'utf-8') 
+//         : `import { Seeder } from './Seeder';\n\nexport const seeders: Seeder[] = [];\n`;
     
-    // Add import and push to seeders array
-    const updatedContent = indexContent.replace(
-        'export const seeders: Seeder[] = [];', 
-        `export const seeders: Seeder[] = [];\nimport ${entityName}Seeder from './${entityName}Seeder';
-seeders.push(${entityName}Seeder);`
-    );
+    
+//     const updatedContent = indexContent.replace(
+//         'export const seeders: Seeder[] = [];', 
+//         `export const seeders: Seeder[] = [];\nimport ${entityName}Seeder from './${entityName}Seeder';
+// seeders.push(${entityName}Seeder);`
+//     );
 
-    fs.writeFileSync(indexPath, updatedContent);
-    console.log(`Updated seeders index at ${indexPath}`);
+//     fs.writeFileSync(indexPath, updatedContent);
+//     console.log(`Updated seeders index at ${indexPath}`);
 };
 
 // Get entity name from command line

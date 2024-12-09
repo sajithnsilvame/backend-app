@@ -1,4 +1,4 @@
-import { AppDataSource } from "../config/database";
+import { AppDataSource } from "../database";
 import { Seeder } from "./Seeder";
 
 export const seeders = {} as { 
